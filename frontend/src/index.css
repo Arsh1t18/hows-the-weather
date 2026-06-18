@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-3xl backdrop-blur-md border border-white/20;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-card-dark {
+    @apply rounded-3xl backdrop-blur-md border border-white/10;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .glass-button {
+    @apply px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/30 font-medium transition-all duration-300;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .weather-gradient-sunny {
+    background: linear-gradient(135deg, #FFD54F 0%, #FFB300 35%, #FF8F00 65%, #FFF3E0 100%);
+  }
+
+  .weather-gradient-rainy {
+    background: linear-gradient(135deg, #607D8B 0%, #78909C 40%, #90A4AE 70%, #CFD8DC 100%);
+  }
+
+  .weather-gradient-cloudy {
+    background: linear-gradient(135deg, #90A4AE 0%, #B0BEC5 40%, #CFD8DC 70%, #ECEFF1 100%);
+  }
+
+  .weather-gradient-windy {
+    background: linear-gradient(135deg, #29B6F6 0%, #4FC3F7 40%, #81D4FA 70%, #E1F5FE 100%);
+  }
+
+  .weather-gradient-snow {
+    background: linear-gradient(135deg, #90CAF9 0%, #BBDEFB 40%, #E3F2FD 70%, #FFFFFF 100%);
+  }
+
+  .weather-gradient-thunderstorm {
+    background: linear-gradient(135deg, #3949AB 0%, #5C6BC0 40%, #7986CB 70%, #E8EAF6 100%);
+  }
+
+  .weather-gradient-night {
+    background: linear-gradient(135deg, #1A237E 0%, #283593 40%, #3949AB 70%, #5C6BC0 100%);
+  }
+
+  .weather-gradient-default {
+    background: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 35%, #0288D1 65%, #E1F5FE 100%);
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .metric-card {
+    @apply glass-card p-5 flex flex-col gap-2 hover:scale-105 transition-transform duration-300 cursor-default;
+  }
+}
+
+/* Rain animation */
+.rain-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.raindrop {
+  position: absolute;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6));
+  animation: rain linear infinite;
+}
+
+/* Snow animation */
+.snowflake {
+  position: absolute;
+  color: white;
+  opacity: 0.8;
+  animation: snow linear infinite;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Wind animation */
+.wind-streak {
+  position: absolute;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+  animation: wind ease-in-out infinite;
+}
+
+/* Lightning */
+.lightning-bolt {
+  position: absolute;
+  animation: lightning ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Sun glow */
+@keyframes sunGlow {
+  0%, 100% { box-shadow: 0 0 60px 20px rgba(255, 200, 0, 0.3), 0 0 100px 40px rgba(255, 160, 0, 0.15); }
+  50% { box-shadow: 0 0 80px 30px rgba(255, 200, 0, 0.5), 0 0 140px 60px rgba(255, 160, 0, 0.25); }
+}
+
+.sun-glow {
+  animation: sunGlow 3s ease-in-out infinite;
+}
+
+/* Page transition */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+/* Shimmer loading */
+.shimmer-bg {
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
